@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MD. Mamun - CV</title>
+<style>
+  :root{
+    --navy:      #0f1236;
+    --navy-soft: #1b1a68;
+    --pink:      #d81b60;
+    --cream:     #fdeedd;
+    --ink:       #1a1a1a;
+    --muted:     #3a3a3a;
+    --page:      #a9b0d4;
+    --side-w:    262px;
+    --head-h:    150px;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+
+  html,body{
+    background:var(--page);
+    font-family:"Segoe UI","Open Sans",Arial,Helvetica,sans-serif;
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .toolbar{ position:fixed; top:16px; right:16px; z-index:99; display:flex; gap:8px; }
+  .toolbar button, .toolbar a{
+    font:600 13px/1 "Segoe UI",Arial,sans-serif; color:#fff; background:var(--navy);
+    border:0; border-radius:8px; padding:11px 15px; cursor:pointer; text-decoration:none;
+    box-shadow:0 4px 14px rgba(0,0,0,.25);
+  }
+  .toolbar button:hover, .toolbar a:hover{ background:var(--pink); }
+
+  .stage{ padding:34px 16px 60px; display:flex; justify-content:center; }
+
+  /* ---------- A4 page ---------- */
+  .card{
+    position:relative;
+    width:794px; height:1123px;
+    background:#fff;
+    display:flex; flex-direction:column;
+    box-shadow:0 18px 50px rgba(0,0,0,.35);
+    overflow:hidden;
+  }
+
+  /* ---------- header ---------- */
+  .header{
+    flex:0 0 auto; height:var(--head-h);
+    background:var(--navy); display:flex; align-items:center;
+  }
+  .header .name{
+    padding-left:200px; padding-right:26px;
+    color:#fff; font-size:50px; font-weight:800;
+    letter-spacing:.4px; line-height:1.04; white-space:nowrap;
+  }
+  .chevron{
+    position:absolute; left:0; top:var(--head-h);
+    width:var(--side-w); height:58px;
+    background:var(--navy);
+    clip-path:polygon(0 0,100% 0,50% 100%);
+    z-index:2;
+  }
+  .photo{
+    position:absolute; z-index:6; left:34px; top:0;
+    width:var(--head-h); height:var(--head-h);
+    border-radius:50%; overflow:hidden; background:#fff; border:5px solid #fff;
+  }
+  .photo img{ width:100%; height:100%; object-fit:cover; object-position:center top; display:block; }
+
+  /* ---------- body ---------- */
+  .body{ flex:1 1 auto; display:flex; align-items:stretch; min-height:0; }
+
+  .sidebar{
+    width:var(--side-w); flex:0 0 var(--side-w);
+    background:var(--cream);
+    padding:92px 20px 26px;
+    font-size:11.2px; line-height:1.4; color:var(--muted);
+  }
+  .main{
+    flex:1 1 auto; background:#fff;
+    padding:38px 28px 26px;
+    font-size:11.5px; line-height:1.4; color:var(--muted);
+  }
+
+  .sec{ margin-bottom:14px; }
+  .sec:last-child{ margin-bottom:0; }
+
+  .sec-title{
+    color:var(--navy-soft); font-size:17px; font-weight:700;
+    padding-bottom:4px; margin-bottom:9px;
+    border-bottom:2.5px solid var(--pink);
+  }
+  .main .sec-title{ font-size:15.5px; }
+
+  p{ text-align:justify; }
+
+  /* contact */
+  .contact{ margin-top:10px; }
+  .contact .row{ display:flex; gap:8px; align-items:flex-start; margin-bottom:7px; font-size:11.4px; color:var(--ink); }
+  .contact .row svg{ flex:0 0 15px; width:15px; height:15px; margin-top:1px; fill:var(--pink); }
+
+  /* education */
+  .edu{ margin-bottom:11px; }
+  .edu:last-child{ margin-bottom:0; }
+  .edu .deg{ font-weight:700; color:var(--ink); font-size:12px; line-height:1.3; }
+  .edu .inst{ margin-top:1px; }
+
+  /* personal info */
+  .info{ width:100%; border-collapse:collapse; }
+  .info td{ padding:2px 0; vertical-align:top; font-size:11px; line-height:1.32; }
+  .info td.k{ width:45%; color:#2a2a2a; }
+  .info td.c{ width:11px; color:#2a2a2a; }
+  .info td.v{ color:var(--ink); }
+
+  /* jobs */
+  .job{ margin-bottom:12px; }
+  .job:last-child{ margin-bottom:0; }
+  .job .role{ font-weight:700; color:var(--ink); font-size:12.2px; letter-spacing:.25px; }
+  .job .org{ font-weight:600; color:#2a2a2a; margin-top:1px; }
+  .job .when{ font-style:italic; color:#444; margin-top:1px; margin-bottom:4px; }
+
+  ul.bullets{ list-style:none; }
+  ul.bullets li{ position:relative; padding-left:13px; margin-bottom:3px; text-align:justify; }
+  ul.bullets li::before{ content:"•"; position:absolute; left:2px; top:-1px; color:var(--navy-soft); font-weight:700; }
+
+  ul.stars{ list-style:none; }
+  ul.stars li{ position:relative; padding-left:15px; margin-bottom:4px; }
+  ul.stars li::before{ content:"★"; position:absolute; left:0; top:-1px; color:var(--pink); font-size:9px; }
+  .skills-grid{ display:grid; grid-template-columns:1fr 1fr; column-gap:18px; }
+
+  .train{ margin-bottom:9px; }
+  .train:last-child{ margin-bottom:0; }
+  .train .t-name{ font-weight:700; color:var(--ink); }
+
+  .decl-sign{ margin-top:15px; }
+  .decl-sign .line{ width:170px; border-top:1.6px solid #111; margin-bottom:4px; }
+  .decl-sign .nm{ font-weight:700; color:var(--ink); }
+  .decl-sign .dt{ margin-top:3px; }
+
+  /* ---------- print ---------- */
+  @page{ size:A4; margin:0; }
+  @media print{
+    html,body{ background:#fff; }
+    .toolbar{ display:none !important; }
+    .stage{ padding:0; display:block; }
+    .card{ width:210mm; height:297mm; box-shadow:none; margin:0; }
+    .sidebar,.main,.header,.chevron,.photo{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="toolbar">
+    <a href="../">Classic v1</a>
+    <button onclick="window.print()">⬇ Print / Save as PDF</button>
+  </div>
+
+  <div class="stage">
+    <div class="card">
+
+      <div class="header">
+        <div class="name">MD. MAMUN</div>
+      </div>
+      <div class="chevron"></div>
+
+      <div class="photo">
+        <picture>
+          <source srcset="../mamun_pic.webp" type="image/webp" />
+          <img src="../mamun_pic.jpg" alt="MD. Mamun" />
+        </picture>
+      </div>
+
+      <div class="body">
+
+        <aside class="sidebar">
+
+          <div class="sec">
+            <div class="sec-title">Contact Details</div>
+            <div class="contact">
+              <div class="row">
+                <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.7 3.6 4.9 6.3 6.3l2.1-2.1c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.5.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.5.1.4 0 .8-.2 1l-2.2 2.3z"/></svg>
+                <span>01911-237314</span>
+              </div>
+              <div class="row">
+                <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                <span>smmamun709@gmail.com</span>
+              </div>
+              <div class="row">
+                <svg viewBox="0 0 24 24"><path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+                <span>Purba Katiarchar, Kishoreganj Sadar, Kishoreganj.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="sec">
+            <div class="sec-title">Education</div>
+            <div class="edu">
+              <div class="deg">Diploma in Civil Engineering</div>
+              <div class="inst">Ayub-Hena Polytechnic Institute,<br />Katabaria, Kishoreganj.</div>
+              <div class="inst">Passing Year 2022 &nbsp;|&nbsp; CGPA 3.34 / 4.00</div>
+            </div>
+            <div class="edu">
+              <div class="deg">Dakhil Examination &ndash; 2015</div>
+              <div class="inst">Haibatnagar AU Kamil Madrasah, Kishoreganj.</div>
+              <div class="inst">Passing Year 2015 &nbsp;|&nbsp; GPA 4.50</div>
+            </div>
+          </div>
+
+          <div class="sec">
+            <div class="sec-title">Personal Information</div>
+            <table class="info">
+              <tr><td class="k">Father's Name</td><td class="c">:</td><td class="v">MD. Jalal Uddin</td></tr>
+              <tr><td class="k">Date of Birth</td><td class="c">:</td><td class="v">01 June 1998</td></tr>
+              <tr><td class="k">Nationality</td><td class="c">:</td><td class="v">Bangladeshi</td></tr>
+              <tr><td class="k">Religion</td><td class="c">:</td><td class="v">Islam</td></tr>
+              <tr><td class="k">Gender</td><td class="c">:</td><td class="v">Male</td></tr>
+              <tr><td class="k">Marital Status</td><td class="c">:</td><td class="v">Married</td></tr>
+              <tr><td class="k">NID No</td><td class="c">:</td><td class="v">3764915488</td></tr>
+              <tr><td class="k">Blood Group</td><td class="c">:</td><td class="v">O+ (Positive)</td></tr>
+              <tr><td class="k">Height</td><td class="c">:</td><td class="v">5 feet 5 inches</td></tr>
+              <tr><td class="k">Weight</td><td class="c">:</td><td class="v">70 kg</td></tr>
+              <tr><td class="k">Present Address</td><td class="c">:</td><td class="v">Purba Katiarchar, Kishoreganj Sadar, Kishoreganj.</td></tr>
+              <tr><td class="k">Permanent Address</td><td class="c">:</td><td class="v">Saguli, Niamatpur, Karimganj, Kishoreganj.</td></tr>
+            </table>
+          </div>
+
+          <div class="sec">
+            <div class="sec-title">Language Proficiency</div>
+            <table class="info">
+              <tr><td class="k">Bengali (Bangla)</td><td class="c">:</td><td class="v">Native</td></tr>
+              <tr><td class="k">English</td><td class="c">:</td><td class="v">Basic to Intermediate</td></tr>
+              <tr><td class="k">Hindi</td><td class="c">:</td><td class="v">Basic to Intermediate</td></tr>
+            </table>
+          </div>
+
+        </aside>
+
+        <main class="main">
+
+          <div class="sec">
+            <div class="sec-title">Profile</div>
+            <p>Diploma in Civil Engineering holder with over five years of practical experience in business management, customer service, computer operations, online services and document processing. A quick learner with good communication, organizational and problem-solving skills, able to work independently or in a team, and seeking a stable, long-term career abroad.</p>
+          </div>
+
+          <div class="sec">
+            <div class="sec-title">Work Experience</div>
+
+            <div class="job">
+              <div class="role">OWNER / SELF-EMPLOYED</div>
+              <div class="org">Haji Furniture Gallery &ndash; Niyamotpur Bazar, Karimganj, Kishoreganj, Bangladesh.</div>
+              <div class="when">2024 &ndash; Present</div>
+              <ul class="bullets">
+                <li>Manage daily business operations, sales and customer service.</li>
+                <li>Handle product purchasing, stock management and supplier communication.</li>
+                <li>Assist customers in selecting furniture and maintain sales, cash &amp; delivery records.</li>
+              </ul>
+            </div>
+
+            <div class="job">
+              <div class="role">OWNER / SELF-EMPLOYED</div>
+              <div class="org">My Choice Studio &amp; Paper House &ndash; Kishoreganj, Bangladesh.</div>
+              <div class="when">2017 &ndash; 2024</div>
+              <ul class="bullets">
+                <li>Managed day-to-day operations, customer service, stationery sales and inventory.</li>
+                <li>Provided photocopying, printing, photography, document processing and online services.</li>
+                <li>Handled computer operations, typing, data entry and online government applications.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sec">
+            <div class="sec-title">Training &amp; Certifications</div>
+            <div class="train">
+              <div class="t-name">Computer Office Application &ndash; 2017 &nbsp;(Result: A+)</div>
+              <div>National Skill Standard Basic Course &nbsp;|&nbsp; Skill Development Training Center, Kishoreganj &nbsp;|&nbsp; 6 Months</div>
+            </div>
+            <div class="train">
+              <div class="t-name">Refrigeration and Air Conditioning &ndash; 2016 &nbsp;(Result: B)</div>
+              <div>Department of Youth Development, Ministry of Youth and Sports &nbsp;|&nbsp; 6 Months</div>
+            </div>
+          </div>
+
+          <div class="sec">
+            <div class="sec-title">Skills</div>
+            <ul class="stars skills-grid">
+              <li>Computer Operation &amp; MS Office</li>
+              <li>Data Entry &amp; Document Processing</li>
+              <li>Customer Service &amp; Communication</li>
+              <li>Sales &amp; Business Management</li>
+              <li>Cash Handling &amp; Record Keeping</li>
+              <li>Inventory &amp; Stock Management</li>
+              <li>Online Services &amp; Internet Handling</li>
+              <li>Time Management</li>
+              <li>Teamwork &amp; Problem Solving</li>
+            </ul>
+          </div>
+
+          <div class="sec">
+            <div class="sec-title">Declaration</div>
+            <p>I certify that all the information provided in this CV is true and complete to the best of my knowledge and belief. I authorize the concerned authority to verify the information provided in this CV.</p>
+            <div class="decl-sign">
+              <div class="line"></div>
+              <div class="nm">MD. Mamun</div>
+              <div class="dt">Date:</div>
+            </div>
+          </div>
+
+        </main>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
